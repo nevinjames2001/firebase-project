@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import {getAuth,onAuthStateChanged} from 'firebase/auth'
 
 const routes = [
   {
@@ -17,6 +18,15 @@ const routes = [
     meta: {
       layout:"Guest"
     }
+  },
+   {
+    path: '/findip',
+    name: 'findip',
+    component: import(/*webpackChunkName:'findip'*/ '@/views/Findip.vue'),
+    meta: {
+      layout: "Authenticated",
+      loginRequired: true
+    }
   }
   
 ]
@@ -26,4 +36,18 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to) => {
+  if (to.meta.loginRequired)
+  {
+    const auth = getAuth()
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('user logged in')
+      }
+      else {
+        router.replace('/')
+      }
+    })
+  }
+})
 export default router

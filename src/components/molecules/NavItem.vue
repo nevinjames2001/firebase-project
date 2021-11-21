@@ -1,6 +1,7 @@
 <template>
-    <ListItem>
-        <router-link :to="to">{{text}}</router-link>
+    <ListItem class="nav-item" v-bind="$attrs">
+        <router-link v-if="userouterlink" :to="to">{{text}}</router-link>
+        <div v-else>{{text}}</div>
     </ListItem>
 </template>
 <script>
@@ -11,15 +12,20 @@ export default{
     components:{
         ListItem
     },
+    inheritAttrs:false,
     props:{
         to:String,
-        text:String
+        text:String,
+        userouterlink:{
+            type:Boolean,
+            default:true
+        }
     }
 }
 </script>
 <style scoped>
 *{
     @apply
-    text-gray-50;
+    text-gray-50 text-3xl;
 }
 </style>

@@ -6,9 +6,11 @@
 import {ref,watch,defineAsyncComponent} from 'vue'
 import {useRoute} from 'vue-router';
 const Guest=defineAsyncComponent(()=>import(/*webpackChunkName:"guest"*/ '@/views/layouts/Guest.vue'))
+const Authenticated=defineAsyncComponent(()=>import(/*webpackChunkName:"Authenticated"*/'@/views/layouts/Authenticated.vue'))
 export default {
   components:{
-    Guest
+    Guest,
+    Authenticated
   },
   setup(){
 

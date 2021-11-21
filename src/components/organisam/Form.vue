@@ -40,7 +40,7 @@ export default {
     },
     emits:['onSubmit'],
     props:{
-        type:String,
+        type: String,
         validator(value){
             return['Login','Register'].includes(value)
         }

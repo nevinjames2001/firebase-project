@@ -1,8 +1,8 @@
 <template>
-    <header class="navbar">
+    <header :class="{expand:showMenu}" class="navbar">
         <div class="icons-set">
             <Logo/>
-            <button class="Hamburger">
+            <button class="Hamburger" @click="expand">
                 <div class="lines"></div>
                 <div class="lines"></div>
                 <div class="lines"></div>
@@ -14,11 +14,24 @@
     </header>
 </template>
 <script>
-import {defineAsyncComponent} from 'vue'
+import {defineAsyncComponent,ref,watch} from 'vue'
+import {useRoute} from 'vue-router'
 const Logo= defineAsyncComponent(()=>import(/*webpackChunkName:"logo"*/'@/components/atoms/Logo.vue'))
 export default {
     components:{
         Logo
+    },
+    setup(){
+        const showMenu=ref(false)
+        watch(useRoute(),()=>{
+            showMenu.value=false
+        })
+        function expand(){
+            showMenu.value=!showMenu.value
+        }
+        return{
+            expand, showMenu
+        }
     }
 
 }
@@ -32,7 +45,8 @@ export default {
     @apply h-[5px] mt-[5px] w-[40px] bg-gray-50;
 }
 .menu{
-    @apply flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 space-x-0 md:space-x-5 md:mt-0 mt-[100px] md:mx-9;
+   @apply flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 space-x-0 
+md:space-x-5 md:mt-0 mt-[100px] md:mx-9 mx-4;
 }
 .hamburger{
     @apply block md:hidden;
