@@ -12,6 +12,9 @@ import {defineAsyncComponent,ref} from 'vue';
 // @ is an alias to /src
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Form from '@/components/organisam/Form.vue'
+
+import { useHead } from '@vueuse/head'
+
 const Prompt=defineAsyncComponent(()=>
   import(/*webpackChunkName*/"@/components/atoms/Prompt.vue")
 );
@@ -22,6 +25,18 @@ export default {
     Prompt,
   },
   setup(){
+     useHead({
+      // Can be static or computed
+      title: "Register",
+      meta: [
+        {
+          name: `description`,
+          content: "Regsiter Page "
+        },
+      ],
+    })
+
+
     const success =ref("");
     function register(user){
       const auth = getAuth();

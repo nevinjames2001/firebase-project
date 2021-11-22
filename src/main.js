@@ -4,7 +4,9 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import '@/index.css'
+import {createHead} from '@vueuse/head'
 
+const head=createHead()
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 const Title=defineAsyncComponent(()=>import(/*webpackchunkName:"title"*/'@/components/atoms/Title.vue' ))
@@ -25,4 +27,4 @@ initializeApp({
   appId: "1:1057902262216:web:51c068ec8d77571f2472fd"
 });
 
-createApp(App).use(store).use(router).component('Title',Title).mount('#app')
+createApp(App).use(store).use(router).use(head).component('Title',Title).mount('#app')

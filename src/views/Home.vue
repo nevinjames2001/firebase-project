@@ -14,6 +14,9 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {ref,defineAsyncComponent} from 'vue';
 import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
+
+import { useHead } from '@vueuse/head'
+
 //import {defineAsyncComponent} from 'vue';
 const Prompt=defineAsyncComponent(()=>import(/*webpackChunkName:"Prompt"*/ "@/components/atoms/Prompt.vue"))
 
@@ -23,7 +26,20 @@ export default {
     Form,
    Prompt
   },
+  
   setup(){
+     useHead({
+      // Can be static or computed
+      title: "Login",
+      meta: [
+        {
+          name: `description`,
+          content: "Login Page "
+        },
+      ],
+    })
+
+
     const loginError=ref('')
     const router=useRouter(),
     store=useStore()
@@ -47,6 +63,8 @@ export default {
         if(error.code=="auth/user-not-found")
           loginError.value="You need to register first as you don't seem to be registered";
       });
+      
+     
      
     }
      

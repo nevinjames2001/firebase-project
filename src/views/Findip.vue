@@ -28,6 +28,9 @@ const Input=defineAsyncComponent(()=>import(/*webpackChunkName:"Input"*/ "@/comp
 const Button=defineAsyncComponent(()=>import(/*webpackChunkName:"Button"*/ "@/components/atoms/Button.vue"))
 const ListItem=defineAsyncComponent(()=>import(/*webpackChunkName:"ListItem"*/ "@/components/atoms/ListItem.vue"))
 const GoogleMap=defineAsyncComponent(()=>import(/*webpackChunkName:"GoogleMaps"*/ "@/components/atoms/GoogleMaps.vue"))
+
+import { useHead } from '@vueuse/head'
+
 export default {
   name: 'findip',
   components:{
@@ -38,6 +41,19 @@ export default {
    GoogleMap
   },
   setup(){
+
+    
+     useHead({
+      // Can be static or computed
+      title: "Find IP",
+      meta: [
+        {
+          name: `description`,
+          content: "Main page of the app "
+        },
+      ],
+    })
+
     const ip=ref('')
     const prompt=ref(''),type=ref(''), ipdetails=ref({})
     function searchIP()
