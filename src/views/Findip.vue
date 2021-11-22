@@ -13,7 +13,7 @@
       <ListItem>IP Address: {{ip}}</ListItem>
     </ul>
 
-    <GoogleMap :address="ipdetails.city + '+' + ipdetails.country"/>
+    <GoogleMap :address="ipdetails.city + '+' + ipdetails.country" @error="showErrorMessage"/>
   </div>
 </template>
 
@@ -89,8 +89,12 @@ export default {
       return flag
     }
 
+    function showErrorMessage(message){
+      type.value="error"
+      prompt.value=message
+    }
     return {
-      ip, prompt, type, searchIP,ipdetails
+      ip, prompt, type, searchIP,ipdetails,showErrorMessage
     }
   }
 
