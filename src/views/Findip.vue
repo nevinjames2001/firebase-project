@@ -4,7 +4,7 @@
     <Prompt :type="type" :message="prompt" v-if="prompt" />
 
     <div class="search-wrapper">
-      <Input v-model="ip" type="search" name="ip" placholder="Enter IP" class="search-input"/>
+      <Input v-model="ip" type="search" name="ip" placholder="Enter IP" class="search-input" text-white/>
       <Button class="secondary-button" @click="searchIP">Find location</Button>
     </div>
 
